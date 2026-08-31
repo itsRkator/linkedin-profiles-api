@@ -1,0 +1,56 @@
+# Render Blueprint — deploy from Git without committing build artifacts.
+# Docs: https://render.com/docs/blueprint-spec
+
+databases:
+  - name: linkedin-profile-api-db
+    plan: free
+    databaseName: linkedin_profile_api
+    user: linkedin_profile_api
+
+services:
+  - type: web
+    name: linkedin-profile-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    releaseCommand: npm run migrate:prod
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: linkedin-profile-api-db
+          property: connectionString
+      - key: LINKEDIN_LI_AT
+        sync: false
+      - key: LINKEDIN_JSESSIONID
+        sync: false
+      - key: LINKEDIN_BCOOKIE
+        sync: false
+      - key: LINKEDIN_BSCOOKIE
+        sync: false
+      - key: LINKEDIN_LIDC
+        sync: false
+      - key: LINKEDIN_LI_RM
+        sync: false
+      - key: LINKEDIN_CF_BM
+        sync: false
+      - key: LINKEDIN_LANG
+        value: v=2&lang=en-us
+      - key: LINKEDIN_USER_AGENT
+        value: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+      - key: LINKEDIN_MIN_DELAY_MS
+        value: "8000"
+      - key: LINKEDIN_MAX_JITTER_MS
+        value: "3000"
+      - key: PROFILE_CACHE_TTL_HOURS
+        value: "24"
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "60000"
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: "20"
+      - key: CORS_ALLOWED_ORIGIN
+        value: "*"
