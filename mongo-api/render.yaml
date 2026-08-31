@@ -1,14 +1,20 @@
-# Render Blueprint — deploy from Git without committing build artifacts.
+# Render Blueprint — mongo-api variant
+# Docs: https://render.com/docs/blueprint-spec
+# Monorepo: rootDir and buildFilter paths are relative to the repository root.
 #
 # MongoDB: Render does not offer managed MongoDB. Provision MongoDB Atlas (or similar)
 # and set MONGODB_URI in the Render dashboard before deploying.
 
 services:
   - type: web
-    name: linkedin-profile-api
+    name: linkedin-profile-api-mongo
     runtime: node
     plan: free
     region: singapore
+    rootDir: mongo-api
+    buildFilter:
+      paths:
+        - mongo-api/**
     buildCommand: npm ci --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /health
@@ -32,9 +38,9 @@ services:
       - key: LINKEDIN_CF_BM
         sync: false
       - key: LINKEDIN_LANG
-        value: v=2&lang=en-us
+        value: "v=2&lang=en-us"
       - key: LINKEDIN_USER_AGENT
-        value: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+        value: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
       - key: LINKEDIN_MIN_DELAY_MS
         value: "8000"
       - key: LINKEDIN_MAX_JITTER_MS

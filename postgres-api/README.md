@@ -86,7 +86,7 @@ render.yaml
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 24+
 - PostgreSQL 14+
 - npm 9+
 

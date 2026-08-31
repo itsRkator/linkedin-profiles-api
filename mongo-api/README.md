@@ -127,7 +127,7 @@ scripts/capture-raw.ts
 
 ## 5. Prerequisites
 
-- Node.js 20+
+- Node.js 24+
 - MongoDB 7+ (local or Atlas)
 - npm 9+
 - Valid LinkedIn session cookies (`li_at`, `JSESSIONID`)

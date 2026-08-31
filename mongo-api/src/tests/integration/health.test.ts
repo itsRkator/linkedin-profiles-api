@@ -1,6 +1,11 @@
 import { jest } from '@jest/globals';
 
 jest.mock('../../db/index.js');
+jest.mock('../../services/linkedin/provider.js', () => ({
+  linkedInProvider: {
+    fetchProfile: jest.fn(),
+  },
+}));
 
 import request from 'supertest';
 import { createApp } from '../../app.js';

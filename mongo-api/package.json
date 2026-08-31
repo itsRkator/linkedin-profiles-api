@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "server.js",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "scripts": {
     "test": "jest --runInBand",
@@ -26,8 +26,8 @@
     "express": "^5.2.1",
     "express-rate-limit": "^8.7.0",
     "helmet": "^8.3.0",
-    "mongoose": "^8.24.4",
-    "undici": "^8.10.0",
+    "mongoose": "^9.9.4",
+    "undici": "^8.10.1",
     "uuid": "^14.0.2",
     "winston": "^3.19.0",
     "zod": "^4.5.4"
