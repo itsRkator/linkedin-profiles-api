@@ -1,0 +1,46 @@
+# Dependencies (installed fresh in container)
+node_modules
+
+# Build output (compiled in container)
+dist
+
+# Environment & secrets
+.env
+.env.*
+
+# Git & CI
+.git
+.github
+
+# IDE & editor
+.cursor
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests & coverage
+coverage
+src/tests
+**/*.test.ts
+**/*.spec.ts
+
+# Dev tooling & docs
+README.md
+eslint.config.js
+.prettierrc
+tsconfig.test.json
+scripts
+
+# Docker & deployment (not needed in build context)
+Dockerfile
+docker-compose*.yml
+render.yaml
+
+# API collections
+*.postman_collection.json
+
+# Node version file
+.nvmrc

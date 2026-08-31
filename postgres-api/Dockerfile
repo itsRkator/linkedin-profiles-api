@@ -18,13 +18,15 @@ ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY package*.json ./
+COPY docker-entrypoint.sh ./
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser && \
+    chmod +x docker-entrypoint.sh && \
     chown -R appuser:nodejs /app
 
 USER appuser
 EXPOSE 3000
 
-ENTRYPOINT ["dumb-init", "--"]
+ENTRYPOINT ["dumb-init", "--", "./docker-entrypoint.sh"]
 CMD ["node", "dist/server.js"]
